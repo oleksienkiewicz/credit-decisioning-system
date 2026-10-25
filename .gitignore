@@ -1,3 +1,7 @@
+# Ignore data, artifacts, and environment variables
+data/
+artifacts/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]
@@ -61,6 +65,8 @@ cover/
 local_settings.py
 db.sqlite3
 db.sqlite3-journal
+staticfiles/
+media/
 
 # Flask stuff:
 instance/
