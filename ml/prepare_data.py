@@ -63,7 +63,7 @@ def convert_units(df):
     df['employment_years'] = df['employment_years'].where(mask)
     df['employment_years'] = df['employment_years']/-DAYS_PER_YEAR
     df['age_years'] = df['age_years']/-DAYS_PER_YEAR
-    df['term_months'] = df['credit_amount']/df['annuity']
+    df['num_installments'] = df['credit_amount']/df['annuity']
 
     df = df.drop('annuity', axis=1)
     
@@ -94,7 +94,7 @@ def print_summary(df):
     """
     print(f"Braki w employment_years: {df['employment_years'].isna().sum():,} (oczekiwane: 55,374)")
     print(f"Wiek: {df['age_years'].min():.1f}-{df['age_years'].max():.1f} lat")
-    print(f"Liczba rat: {df['term_months'].min():.1f}-{df['term_months'].max():.1f} miesięcy")
+    print(f"Liczba rat: {df['num_installments'].min():.1f}-{df['num_installments'].max():.1f} miesięcy")
 
 
 def main():
