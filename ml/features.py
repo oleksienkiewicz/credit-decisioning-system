@@ -17,6 +17,7 @@ from pathlib import Path
 
 
 CATEGORICAL_COLUMNS = ["income_type", "education"]
+NUMERICAL_COLUMNS = ["income", "credit_amount", "age_years", "employment_years", "ext_score_2", "ext_score_3", "num_installments",]
 FEATURE_COLUMNS = [
     "income",
     "credit_amount",
@@ -42,8 +43,8 @@ def add_features(df):
     Dolicza cechy pochodne i zwraca 13 kolumn modelowych w stałej kolejności.
     """
     df = df.copy()
-    for col in CATEGORICAL_COLUMNS:
-        df[col] = df[col].astype("category")
+    df[NUMERICAL_COLUMNS] = df[NUMERICAL_COLUMNS].astype(float)
+    df[CATEGORICAL_COLUMNS] = df[CATEGORICAL_COLUMNS].astype("category")
 
     df['installment_amount'] = df['credit_amount'] / df['num_installments']
     df['credit_to_income'] = df['credit_amount'] / df['income']
