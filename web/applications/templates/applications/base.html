@@ -1,0 +1,133 @@
+{# Shared page skeleton. Other templates extend it and fill in the blocks. #}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Credit Decisioning{% endblock %}</title>
+    <style>
+        body {
+            font-family: system-ui, sans-serif;
+            max-width: 720px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+            color: #222;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        header a {
+            color: #0b5cad;
+            text-decoration: none;
+            margin-left: 1rem;
+        }
+
+        .brand {
+            font-weight: 600;
+            color: #222;
+            margin-left: 0;
+        }
+
+        form p {
+            margin: 0 0 1rem;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 0.4rem;
+            box-sizing: border-box;
+        }
+
+        .errorlist {
+            color: #b00020;
+            margin: 0.25rem 0;
+            padding-left: 1.2rem;
+        }
+
+        button {
+            padding: 0.6rem 1.2rem;
+            background: #0b5cad;
+            color: #fff;
+            border: 0;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th,
+        td {
+            text-align: left;
+            padding: 0.4rem 0.5rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        th {
+            width: 45%;
+            color: #555;
+            font-weight: 500;
+        }
+
+        .status {
+            display: inline-block;
+            padding: 0.3rem 0.7rem;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+
+        .status-auto_approved {
+            background: #e3f4e8;
+            color: #1b6b34;
+        }
+
+        .status-manual_review {
+            background: #fff4d6;
+            color: #7a5a00;
+        }
+
+        .status-auto_rejected {
+            background: #fde4e4;
+            color: #a01818;
+        }
+
+        .status-not_scored {
+            background: #eee;
+            color: #555;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        {# {% url 'name' %} builds the link from the URL name in urls.py, never hard-code paths #}
+        <a class="brand" href="{% url 'application_create' %}">Credit Decisioning</a>
+        <nav>
+            <a href="{% url 'application_create' %}">New application</a>
+            <a href="{% url 'admin:index' %}">Admin</a>
+        </nav>
+    </header>
+    <main>
+        {# Child templates put their content here #}
+        {% block content %}{% endblock %}
+    </main>
+</body>
+
+</html>

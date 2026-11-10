@@ -13,7 +13,7 @@ class LoanApplicationForm(forms.ModelForm):
 
     def clean(self):
         """Walidacja zależności między polami (staż a źródło dochodu)."""
-        cleaned_data = super().clean()   # najpierw standardowa walidacja pól
+        cleaned_data = super().clean()
 
         income_type = cleaned_data.get("income_type")
         employment_years = cleaned_data.get("employment_years")

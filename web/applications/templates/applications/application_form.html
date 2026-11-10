@@ -1,0 +1,19 @@
+{# Must be the first line: reuse base.html and fill in its blocks #}
+{% extends "applications/base.html" %}
+
+{% block title %}New application{% endblock %}
+
+{% block content %}
+<h1>New loan application</h1>
+
+{# method="post": the view saves and scores only on POST #}
+<form method="post" novalidate>
+    {# Protection against forged form submissions; without it Django returns 403 #}
+    {% csrf_token %}
+
+    {# Renders every form field with its label and error messages #}
+    {{ form.as_p }}
+
+    <button type="submit">Submit application</button>
+</form>
+{% endblock %}

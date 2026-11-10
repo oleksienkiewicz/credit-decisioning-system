@@ -1,0 +1,76 @@
+{% extends "applications/base.html" %}
+
+{% block title %}Application #{{ application.pk }}{% endblock %}
+
+{% block content %}
+<h1>Application #{{ application.pk }}</h1>
+
+{# get_status_display returns the human label ("Auto approved") for a choices field #}
+{# |lower turns "AUTO_APPROVED" into "auto_approved" to pick the CSS colour #}
+<p>
+    <span class="status status-{{ application.status|lower }}">
+        {{ application.get_status_display }}
+    </span>
+</p>
+
+<h2>Scoring</h2>
+{% if application.probability_of_default is not None %}
+<table>
+    <tr>
+        <th>Probability of default</th>
+        <td>{{ application.probability_of_default|floatformat:3 }}</td>
+    </tr>
+    <tr>
+        <th>Model version</th>
+        <td>{{ application.model_version }}</td>
+    </tr>
+</table>
+{% else %}
+<p>This application has not been scored yet (the model service was unavailable).</p>
+{% endif %}
+
+<h2>Application details</h2>
+<table>
+    <tr>
+        <th>Income</th>
+        <td>{{ application.income }}</td>
+    </tr>
+    <tr>
+        <th>Loan amount</th>
+        <td>{{ application.credit_amount }}</td>
+    </tr>
+    <tr>
+        <th>Number of instalments</th>
+        <td>{{ application.num_installments }}</td>
+    </tr>
+    <tr>
+        <th>Age</th>
+        <td>{{ application.age_years }}</td>
+    </tr>
+    {# default_if_none shows a dash instead of "None" for empty fields #}
+    <tr>
+        <th>Employment (years)</th>
+        <td>{{ application.employment_years|default_if_none:"—" }}</td>
+    </tr>
+    <tr>
+        <th>Income type</th>
+        <td>{{ application.get_income_type_display }}</td>
+    </tr>
+    <tr>
+        <th>Education</th>
+        <td>{{ application.get_education_display }}</td>
+    </tr>
+    <tr>
+        <th>External score 2</th>
+        <td>{{ application.ext_score_2|default_if_none:"—" }}</td>
+    </tr>
+    <tr>
+        <th>External score 3</th>
+        <td>{{ application.ext_score_3|default_if_none:"—" }}</td>
+    </tr>
+    <tr>
+        <th>Submitted</th>
+        <td>{{ application.created_at|date:"Y-m-d H:i" }}</td>
+    </tr>
+</table>
+{% endblock %}
